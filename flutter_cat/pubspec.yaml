@@ -10,6 +10,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  domain:
+    path: ./lib/src/business/domain
+  di:
+    path: ./lib/src/di
+  flutter_native_splash: ^2.4.1
+  get_it: ^8.0.3
+  go_router: ^14.8.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
