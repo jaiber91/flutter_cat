@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cat/src/configs/router_config/package.dart';
+import 'package:flutter_cat/src/di/lib/setup_di.dart';
+import 'package:get_it/get_it.dart';
 
 void main() {
+  setupDI(locator);
+
   runApp(const MainApp());
 }
+
+//TODO: EVALUTAE SI IS NECESARY CREATE A FILE FOR THIS
+GetIt _getIt = GetIt.I;
+GetIt get locator => _getIt;
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});

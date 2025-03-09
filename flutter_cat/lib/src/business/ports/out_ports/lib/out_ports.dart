@@ -1,7 +1,7 @@
-library out_ports;
+import 'package:domain/cat/cat_domain.dart';
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+abstract class CatOutPorts {
+  Future<CatDomain> getCat({
+    required String breeds,
+  });
 }
