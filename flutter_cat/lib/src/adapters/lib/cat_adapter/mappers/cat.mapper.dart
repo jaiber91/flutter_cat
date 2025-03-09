@@ -11,6 +11,19 @@ extension CatMapper on CatDTO {
       temperament: temperament,
       intelligence: intelligence,
       imageUrl: imageUrl,
+      lifeSpan: lifeSpan,
+      adaptability: adaptability,
+      affectionLevel: affectionLevel,
+      childFriendly: childFriendly,
+      dogFriendly: dogFriendly,
+      energyLevel: energyLevel,
+      grooming: grooming,
+      healthIssues: healthIssues,
+      sheddingLevel: sheddingLevel,
+      socialNeeds: socialNeeds,
+      strangerFriendly: strangerFriendly,
+      vocalisation: vocalisation,
+      wikipediaUrl: wikipediaUrl,
     );
   }
 }

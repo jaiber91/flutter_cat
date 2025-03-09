@@ -7,3 +7,5 @@ final getCatProvider = FutureProvider<List<CatDomain>>((ref) async {
   final catUseCase = getIt<CatInPorts>();
   return await catUseCase.getCat();
 });
+
+final selectedCatProvider = StateProvider<CatDomain?>((ref) => null);
