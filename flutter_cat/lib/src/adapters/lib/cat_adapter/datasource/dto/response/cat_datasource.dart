@@ -1,6 +1,7 @@
 import 'package:adapters/cat_adapter/datasource/dto/response/cat_dto.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../../../shared/http/http_api_key.dart';
 import '../../../../shared/http/http_service.dart';
 
 class CatDatasource {
@@ -10,8 +11,7 @@ class CatDatasource {
 
   Future<List<CatDTO>> getCats() async {
     final Map<String, dynamic> headers = {
-      'x-api-key':
-          'live_99Qe4Ppj34NdplyLW67xCV7Ds0oSLKGgcWWYnSzMJY9C0QOu0HUR4azYxWkyW2nr',
+      'x-api-key': HttpApiKey.apiKey,
     };
     try {
       final response =

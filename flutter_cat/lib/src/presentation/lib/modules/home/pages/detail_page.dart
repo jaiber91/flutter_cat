@@ -10,9 +10,7 @@ class DetailPage extends ConsumerWidget {
     if (selectedCat == null) {
       return Scaffold(
         appBar: AppBar(
-          leading: BackButton(
-            onPressed: () => Navigator.pop(context),
-          ),
+          leading: const BackButton(),
           title: const Text('Error'),
           centerTitle: true,
         ),
