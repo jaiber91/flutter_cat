@@ -4,6 +4,7 @@ class CatDomain {
   final String origin;
   final String description;
   final String temperament;
+  final int intelligence;
   final String? imageUrl;
 
   CatDomain({
@@ -12,6 +13,7 @@ class CatDomain {
     required this.origin,
     required this.description,
     required this.temperament,
+    required this.intelligence,
     this.imageUrl,
   });
 }

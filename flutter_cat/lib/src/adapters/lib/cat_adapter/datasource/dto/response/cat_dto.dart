@@ -11,13 +11,16 @@ class CatDTO with _$CatDTO {
     required String origin,
     required String description,
     required String temperament,
-    @JsonKey(fromJson: _imageFromJson, toJson: _imageToJson) String? imageUrl,
-  }) = _Cat;
+    required int intelligence,
+    @JsonKey(name: 'image', fromJson: _imageFromJson) String? imageUrl,
+  }) = _CatDTO;
 
   factory CatDTO.fromJson(Map<String, dynamic> json) => _$CatDTOFromJson(json);
 }
 
-String? _imageFromJson(Map<String, dynamic>? image) => image?['url'] as String?;
-
-Map<String, dynamic>? _imageToJson(String? url) =>
-    url != null ? {'url': url} : null;
+String? _imageFromJson(dynamic image) {
+  if (image is Map<String, dynamic> && image.containsKey('url')) {
+    return image['url'] as String?;
+  }
+  return null;
+}

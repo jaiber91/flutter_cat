@@ -6,9 +6,10 @@ extension CatMapper on CatDTO {
     return CatDomain(
       id: id,
       name: name,
+      origin: origin,
       description: description,
       temperament: temperament,
-      origin: origin,
+      intelligence: intelligence,
       imageUrl: imageUrl,
     );
   }

@@ -8,7 +8,7 @@ class GetCatUseCase extends CatInPorts {
   GetCatUseCase(this._catOutPorts);
 
   @override
-  Future<CatDomain> getCat({required String breeds}) async {
-    return await _catOutPorts.getCat(breeds: breeds);
+  Future<List<CatDomain>> getCat() async {
+    return await _catOutPorts.getCat();
   }
 }

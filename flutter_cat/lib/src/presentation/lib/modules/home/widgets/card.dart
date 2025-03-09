@@ -17,6 +17,8 @@ class CatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final urlOptional =
+        imageUrl.isEmpty ? "https://picsum.photos/200" : imageUrl;
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -40,7 +42,7 @@ class CatCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Image.network(
-              imageUrl,
+              urlOptional,
               height: 120,
               width: 120,
               fit: BoxFit.cover,

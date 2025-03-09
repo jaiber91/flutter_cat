@@ -1,13 +1,13 @@
 part of '../package.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   final TextEditingController _searchController = TextEditingController();
   List<String> items = [
     "Flutter",
@@ -23,30 +23,23 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final cat = await getIt<CatInPorts>().getCat(breeds: "Abyssinian");
-      debugPrint('imprimiendo desde el home: ${cat.name}');
-    });
   }
 
-  @override
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Catbreeds")),
-      body: _body(),
-    );
-  }
+    final catAsync = ref.watch(getCatProvider); // Observa el provider
 
-  Padding _body() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          _searchField(),
-          const SizedBox(height: 16),
-          _list(),
-        ],
+    return Scaffold(
+      appBar: AppBar(title: const Text("Cat Breeds")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            _searchField(),
+            const SizedBox(height: 16),
+            Expanded(child: _list(catAsync)), // ✅ Pasa la data al método _list
+          ],
+        ),
       ),
     );
   }
@@ -61,22 +54,28 @@ class _HomePageState extends State<HomePage> {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
+      onChanged: (value) {
+        setState(() {}); // 🔥 Si quieres actualizar dinámicamente la UI
+      },
     );
   }
 
-  Expanded _list() {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: items.length,
+  Widget _list(AsyncValue<List<CatDomain>> catAsync) {
+    return catAsync.when(
+      data: (cats) => ListView.builder(
+        itemCount: cats.length,
         itemBuilder: (context, index) {
-          return const CatCard(
-            imageUrl: "https://picsum.photos/200/300",
-            breedName: "Otra Raza",
-            country: "Otro País",
-            intelligence: 4,
+          final cat = cats[index];
+          return CatCard(
+            imageUrl: cat.imageUrl ?? '',
+            breedName: cat.name,
+            country: cat.origin,
+            intelligence: cat.intelligence,
           );
         },
       ),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (err, stack) => Center(child: Text('Error: $err')),
     );
   }
 }
