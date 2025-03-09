@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CatDTO _$CatDTOFromJson(Map<String, dynamic> json) {
-  return _Cat.fromJson(json);
+  return _CatDTO.fromJson(json);
 }
 
 /// @nodoc
@@ -25,7 +25,8 @@ mixin _$CatDTO {
   String get origin => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get temperament => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: _imageFromJson, toJson: _imageToJson)
+  int get intelligence => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image', fromJson: _imageFromJson)
   String? get imageUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,8 +45,8 @@ abstract class $CatDTOCopyWith<$Res> {
       String origin,
       String description,
       String temperament,
-      @JsonKey(fromJson: _imageFromJson, toJson: _imageToJson)
-      String? imageUrl});
+      int intelligence,
+      @JsonKey(name: 'image', fromJson: _imageFromJson) String? imageUrl});
 }
 
 /// @nodoc
@@ -66,6 +67,7 @@ class _$CatDTOCopyWithImpl<$Res, $Val extends CatDTO>
     Object? origin = null,
     Object? description = null,
     Object? temperament = null,
+    Object? intelligence = null,
     Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -89,6 +91,10 @@ class _$CatDTOCopyWithImpl<$Res, $Val extends CatDTO>
           ? _value.temperament
           : temperament // ignore: cast_nullable_to_non_nullable
               as String,
+      intelligence: null == intelligence
+          ? _value.intelligence
+          : intelligence // ignore: cast_nullable_to_non_nullable
+              as int,
       imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -98,9 +104,10 @@ class _$CatDTOCopyWithImpl<$Res, $Val extends CatDTO>
 }
 
 /// @nodoc
-abstract class _$$CatImplCopyWith<$Res> implements $CatDTOCopyWith<$Res> {
-  factory _$$CatImplCopyWith(_$CatImpl value, $Res Function(_$CatImpl) then) =
-      __$$CatImplCopyWithImpl<$Res>;
+abstract class _$$CatDTOImplCopyWith<$Res> implements $CatDTOCopyWith<$Res> {
+  factory _$$CatDTOImplCopyWith(
+          _$CatDTOImpl value, $Res Function(_$CatDTOImpl) then) =
+      __$$CatDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -109,15 +116,16 @@ abstract class _$$CatImplCopyWith<$Res> implements $CatDTOCopyWith<$Res> {
       String origin,
       String description,
       String temperament,
-      @JsonKey(fromJson: _imageFromJson, toJson: _imageToJson)
-      String? imageUrl});
+      int intelligence,
+      @JsonKey(name: 'image', fromJson: _imageFromJson) String? imageUrl});
 }
 
 /// @nodoc
-class __$$CatImplCopyWithImpl<$Res>
-    extends _$CatDTOCopyWithImpl<$Res, _$CatImpl>
-    implements _$$CatImplCopyWith<$Res> {
-  __$$CatImplCopyWithImpl(_$CatImpl _value, $Res Function(_$CatImpl) _then)
+class __$$CatDTOImplCopyWithImpl<$Res>
+    extends _$CatDTOCopyWithImpl<$Res, _$CatDTOImpl>
+    implements _$$CatDTOImplCopyWith<$Res> {
+  __$$CatDTOImplCopyWithImpl(
+      _$CatDTOImpl _value, $Res Function(_$CatDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -128,9 +136,10 @@ class __$$CatImplCopyWithImpl<$Res>
     Object? origin = null,
     Object? description = null,
     Object? temperament = null,
+    Object? intelligence = null,
     Object? imageUrl = freezed,
   }) {
-    return _then(_$CatImpl(
+    return _then(_$CatDTOImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -151,6 +160,10 @@ class __$$CatImplCopyWithImpl<$Res>
           ? _value.temperament
           : temperament // ignore: cast_nullable_to_non_nullable
               as String,
+      intelligence: null == intelligence
+          ? _value.intelligence
+          : intelligence // ignore: cast_nullable_to_non_nullable
+              as int,
       imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -161,17 +174,18 @@ class __$$CatImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CatImpl implements _Cat {
-  _$CatImpl(
+class _$CatDTOImpl implements _CatDTO {
+  _$CatDTOImpl(
       {required this.id,
       required this.name,
       required this.origin,
       required this.description,
       required this.temperament,
-      @JsonKey(fromJson: _imageFromJson, toJson: _imageToJson) this.imageUrl});
+      required this.intelligence,
+      @JsonKey(name: 'image', fromJson: _imageFromJson) this.imageUrl});
 
-  factory _$CatImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CatImplFromJson(json);
+  factory _$CatDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CatDTOImplFromJson(json);
 
   @override
   final String id;
@@ -184,19 +198,21 @@ class _$CatImpl implements _Cat {
   @override
   final String temperament;
   @override
-  @JsonKey(fromJson: _imageFromJson, toJson: _imageToJson)
+  final int intelligence;
+  @override
+  @JsonKey(name: 'image', fromJson: _imageFromJson)
   final String? imageUrl;
 
   @override
   String toString() {
-    return 'CatDTO(id: $id, name: $name, origin: $origin, description: $description, temperament: $temperament, imageUrl: $imageUrl)';
+    return 'CatDTO(id: $id, name: $name, origin: $origin, description: $description, temperament: $temperament, intelligence: $intelligence, imageUrl: $imageUrl)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CatImpl &&
+            other is _$CatDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.origin, origin) || other.origin == origin) &&
@@ -204,40 +220,43 @@ class _$CatImpl implements _Cat {
                 other.description == description) &&
             (identical(other.temperament, temperament) ||
                 other.temperament == temperament) &&
+            (identical(other.intelligence, intelligence) ||
+                other.intelligence == intelligence) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, origin, description, temperament, imageUrl);
+  int get hashCode => Object.hash(runtimeType, id, name, origin, description,
+      temperament, intelligence, imageUrl);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CatImplCopyWith<_$CatImpl> get copyWith =>
-      __$$CatImplCopyWithImpl<_$CatImpl>(this, _$identity);
+  _$$CatDTOImplCopyWith<_$CatDTOImpl> get copyWith =>
+      __$$CatDTOImplCopyWithImpl<_$CatDTOImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CatImplToJson(
+    return _$$CatDTOImplToJson(
       this,
     );
   }
 }
 
-abstract class _Cat implements CatDTO {
-  factory _Cat(
+abstract class _CatDTO implements CatDTO {
+  factory _CatDTO(
       {required final String id,
       required final String name,
       required final String origin,
       required final String description,
       required final String temperament,
-      @JsonKey(fromJson: _imageFromJson, toJson: _imageToJson)
-      final String? imageUrl}) = _$CatImpl;
+      required final int intelligence,
+      @JsonKey(name: 'image', fromJson: _imageFromJson)
+      final String? imageUrl}) = _$CatDTOImpl;
 
-  factory _Cat.fromJson(Map<String, dynamic> json) = _$CatImpl.fromJson;
+  factory _CatDTO.fromJson(Map<String, dynamic> json) = _$CatDTOImpl.fromJson;
 
   @override
   String get id;
@@ -250,10 +269,12 @@ abstract class _Cat implements CatDTO {
   @override
   String get temperament;
   @override
-  @JsonKey(fromJson: _imageFromJson, toJson: _imageToJson)
+  int get intelligence;
+  @override
+  @JsonKey(name: 'image', fromJson: _imageFromJson)
   String? get imageUrl;
   @override
   @JsonKey(ignore: true)
-  _$$CatImplCopyWith<_$CatImpl> get copyWith =>
+  _$$CatDTOImplCopyWith<_$CatDTOImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

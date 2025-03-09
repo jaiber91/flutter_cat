@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cat/src/configs/router_config/package.dart';
 import 'package:flutter_cat/src/di/lib/setup_di.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   setupDI(locator);
 
-  runApp(const MainApp());
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 //TODO: EVALUTAE SI IS NECESARY CREATE A FILE FOR THIS

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import '../../shared/utils/export_di.dart';
-import 'package:in_ports/in_ports.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:domain/cat/cat_domain.dart';
+
 import '../../../../configs/router_config/package.dart';
+import '../../providers/cat_provider.dart';
 
 part 'router.dart';
 part 'pages/home_page.dart';
