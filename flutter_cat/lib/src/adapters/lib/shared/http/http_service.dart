@@ -1,6 +1,7 @@
 import 'package:adapters/shared/http/dto/http_request_dto.dart';
 import 'package:adapters/shared/http/dto/http_response_dto.dart';
 import 'package:adapters/shared/http/http_interface.dart';
+import 'package:adapters/shared/http/http_path.dart';
 import 'package:dio/dio.dart';
 
 class HttpService {
@@ -22,9 +23,9 @@ class HttpService {
   }) {
     return HttpRequestDTO(
       uri: Uri(
-        scheme: 'https', // TODO: move to config
-        host: 'api.thecatapi.com', // ✅ Solo el dominio, sin /v1
-        path: 'v1$path',
+        scheme: HttpPath.schemes,
+        host: HttpPath.baseUrl,
+        path: '${HttpPath.path}$path',
         queryParameters: queryParameters,
       ),
       headers: headers,

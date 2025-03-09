@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
         final catAsync = ref.watch(getCatProvider);
         return catAsync.when(
           data: (cats) => ListView.builder(
+            physics: const ClampingScrollPhysics(),
             itemCount: cats.length,
             itemBuilder: (context, index) {
               final cat = cats[index];
@@ -59,6 +60,10 @@ class _HomePageState extends State<HomePage> {
                 breedName: cat.name,
                 country: cat.origin,
                 intelligence: cat.intelligence,
+                onTap: () {
+                  ref.read(selectedCatProvider.notifier).state = cat;
+                  context.go(RouteNames.detailPage.path);
+                },
               );
             },
           ),
