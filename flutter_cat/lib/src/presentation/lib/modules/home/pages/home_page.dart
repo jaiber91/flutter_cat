@@ -1,52 +1,39 @@
 part of '../package.dart';
 
-class HomePage extends ConsumerStatefulWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  ConsumerState<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
-  List<String> items = [
-    "Flutter",
-    "Dart",
-    "React Native",
-    "Swift",
-    "Kotlin",
-    "Java",
-    "Python"
-  ];
-
-  List<String> filteredItems = [];
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  final FocusNode _focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
-    final catAsync = ref.watch(getCatProvider); // Observa el provider
-
-    return Scaffold(
-      appBar: AppBar(title: const Text("Cat Breeds")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _searchField(),
-            const SizedBox(height: 16),
-            Expanded(child: _list(catAsync)), // ✅ Pasa la data al método _list
-          ],
+    return GestureDetector(
+      onTap: () => _focusNode.unfocus(),
+      child: Scaffold(
+        appBar: AppBar(title: const Text("Cat Breeds")),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              _searchField(),
+              const SizedBox(height: 16),
+              Expanded(child: _list()),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  TextField _searchField() {
+  Widget _searchField() {
     return TextField(
       controller: _searchController,
+      focusNode: _focusNode,
       decoration: InputDecoration(
         labelText: "Buscar",
         prefixIcon: const Icon(Icons.search),
@@ -54,28 +41,31 @@ class _HomePageState extends ConsumerState<HomePage> {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      onChanged: (value) {
-        setState(() {}); // 🔥 Si quieres actualizar dinámicamente la UI
-      },
+      onChanged: (value) {},
     );
   }
 
-  Widget _list(AsyncValue<List<CatDomain>> catAsync) {
-    return catAsync.when(
-      data: (cats) => ListView.builder(
-        itemCount: cats.length,
-        itemBuilder: (context, index) {
-          final cat = cats[index];
-          return CatCard(
-            imageUrl: cat.imageUrl ?? '',
-            breedName: cat.name,
-            country: cat.origin,
-            intelligence: cat.intelligence,
-          );
-        },
-      ),
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, stack) => Center(child: Text('Error: $err')),
+  Widget _list() {
+    return Consumer(
+      builder: (context, ref, child) {
+        final catAsync = ref.watch(getCatProvider);
+        return catAsync.when(
+          data: (cats) => ListView.builder(
+            itemCount: cats.length,
+            itemBuilder: (context, index) {
+              final cat = cats[index];
+              return CatCard(
+                imageUrl: cat.imageUrl ?? '',
+                breedName: cat.name,
+                country: cat.origin,
+                intelligence: cat.intelligence,
+              );
+            },
+          ),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (err, stack) => Center(child: Text('Error: $err')),
+        );
+      },
     );
   }
 }
