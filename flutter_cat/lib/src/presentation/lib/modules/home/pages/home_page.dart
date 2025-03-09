@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: () => _focusNode.unfocus(),
       child: Scaffold(
-        appBar: AppBar(title: const Text("Cat Breeds")),
+        appBar: AppBar(title: const Text("Cat Breeds"), centerTitle: true),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
