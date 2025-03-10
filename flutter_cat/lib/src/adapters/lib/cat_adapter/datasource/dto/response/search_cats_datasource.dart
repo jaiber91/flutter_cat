@@ -2,21 +2,27 @@ import 'package:adapters/cat_adapter/datasource/dto/response/cat_dto.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../../shared/http/http_api_key.dart';
-import '../../../../shared/http/http_path.dart';
 import '../../../../shared/http/http_service.dart';
 
-class CatDatasource {
+class SearchCatsDatasource {
   final HttpService _httpService;
 
-  CatDatasource(this._httpService);
+  SearchCatsDatasource(this._httpService);
 
-  Future<List<CatDTO>> getCats() async {
+  Future<List<CatDTO>> searchsCats(String query) async {
     final Map<String, dynamic> headers = {
       'x-api-key': HttpApiKey.apiKey,
     };
+    Map<String, dynamic>? queryParameters = {
+      'name': query,
+    };
     try {
-      final response =
-          await _httpService.get(path: HttpPath.breeds, headers: headers);
+      final response = //TODO: USE THE CORRECT PATH OF FILE
+          await _httpService.get(
+        path: '/breeds/search',
+        headers: headers,
+        queryParameters: queryParameters,
+      );
       final List<dynamic> data = response.data;
 
       final cats = data.map((json) => CatDTO.fromJson(json)).toList();

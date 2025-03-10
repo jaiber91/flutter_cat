@@ -1,7 +1,7 @@
 import 'package:adapters/cat_adapter/datasource/dto/response/cat_dto.dart';
 import 'package:adapters/cat_adapter/mappers/cat.mapper.dart';
 import 'package:domain/cat/cat_domain.dart';
-import 'package:out_ports/out_ports.dart';
+import 'package:out_ports/cats/out_ports.dart';
 
 import '../datasource/dto/response/cat_datasource.dart';
 
