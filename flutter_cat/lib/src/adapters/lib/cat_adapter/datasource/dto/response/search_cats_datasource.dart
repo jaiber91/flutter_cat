@@ -2,6 +2,7 @@ import 'package:adapters/cat_adapter/datasource/dto/response/cat_dto.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../../shared/http/http_api_key.dart';
+import '../../../../shared/http/http_path.dart';
 import '../../../../shared/http/http_service.dart';
 
 class SearchCatsDatasource {
@@ -17,9 +18,8 @@ class SearchCatsDatasource {
       'name': query,
     };
     try {
-      final response = //TODO: USE THE CORRECT PATH OF FILE
-          await _httpService.get(
-        path: '/breeds/search',
+      final response = await _httpService.get(
+        path: '${HttpPath.breeds}${HttpPath.search}',
         headers: headers,
         queryParameters: queryParameters,
       );

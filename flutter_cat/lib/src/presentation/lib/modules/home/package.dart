@@ -12,3 +12,5 @@ part 'router.dart';
 part 'pages/home_page.dart';
 part 'pages/detail_page.dart';
 part 'widgets/card.dart';
+part 'widgets/search_field.dart';
+part 'widgets/cat_list.dart';
