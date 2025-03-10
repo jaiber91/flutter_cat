@@ -37,66 +37,19 @@ class _HomePageState extends ConsumerState<HomePage> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              _searchField(),
+              SearchField(
+                controller: _searchController,
+                focusNode: _focusNode,
+                onChanged: (value) {
+                  ref.read(searchQueryProvider.notifier).state = value;
+                },
+              ),
               const SizedBox(height: 16),
-              Expanded(child: _list(searchQuery)),
+              Expanded(child: CatList(searchQuery: searchQuery)),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget _searchField() {
-    return TextField(
-      controller: _searchController,
-      focusNode: _focusNode,
-      decoration: InputDecoration(
-        labelText: "Buscar",
-        prefixIcon: const Icon(Icons.search),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      onChanged: (value) {
-        _onSearchChanged(value);
-      },
-    );
-  }
-
-  void _onSearchChanged(String query) {
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
-
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      ref.read(searchQueryProvider.notifier).state = query;
-    });
-  }
-
-  Widget _list(String searchQuery) {
-    final catAsync = searchQuery.isEmpty
-        ? ref.watch(getCatProvider)
-        : ref.watch(searchCatProvider(searchQuery));
-
-    return catAsync.when(
-      data: (cats) => ListView.builder(
-        physics: const ClampingScrollPhysics(),
-        itemCount: cats.length,
-        itemBuilder: (context, index) {
-          final cat = cats[index];
-          return CatCard(
-            imageUrl: cat.imageUrl ?? '',
-            breedName: cat.name,
-            country: cat.origin,
-            intelligence: cat.intelligence,
-            onTap: () {
-              ref.read(selectedCatProvider.notifier).state = cat;
-              context.go(RouteNames.detailPage.path);
-            },
-          );
-        },
-      ),
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, stack) => Center(child: Text('Error: $err')),
     );
   }
 }
