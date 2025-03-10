@@ -1,8 +1,8 @@
-import 'package:in_ports/in_ports.dart';
-import 'package:out_ports/out_ports.dart';
+import 'package:in_ports/cats/in_ports.dart';
+import 'package:out_ports/cats/out_ports.dart';
 import 'package:domain/cat/cat_domain.dart';
 
-class GetCatUseCase extends CatInPorts {
+class GetCatUseCase implements CatInPorts {
   final CatOutPorts _catOutPorts;
 
   GetCatUseCase(this._catOutPorts);
