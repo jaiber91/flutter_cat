@@ -20,6 +20,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Cat',
       routerConfig: appRouter,
+      themeMode: ThemeMode.system,
     );
   }
 }
