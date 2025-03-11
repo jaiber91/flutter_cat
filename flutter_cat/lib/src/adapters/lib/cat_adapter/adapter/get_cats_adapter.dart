@@ -3,12 +3,12 @@ import 'package:adapters/cat_adapter/mappers/cat.mapper.dart';
 import 'package:domain/cat_domain/cat_domain.dart';
 import 'package:out_ports/cats_out_ports/get_cats_out_ports.dart';
 
-import '../datasource/dto/response/cat_datasource.dart';
+import '../datasource/dto/response/get_cats_datasource.dart';
 
-class CatAdapter implements GetCatsOutPort {
-  final CatDatasource _catDatasource;
+class GetCatAdapter implements GetCatsOutPort {
+  final GetCatDatasource _catDatasource;
 
-  CatAdapter(this._catDatasource);
+  GetCatAdapter(this._catDatasource);
 
   @override
   Future<List<CatDomain>> getCat() async {

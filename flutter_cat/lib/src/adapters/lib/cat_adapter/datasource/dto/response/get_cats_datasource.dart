@@ -5,10 +5,10 @@ import '../../../../shared/http/http_api_key.dart';
 import '../../../../shared/http/http_path.dart';
 import '../../../../shared/http/http_service.dart';
 
-class CatDatasource {
+class GetCatDatasource {
   final HttpService _httpService;
 
-  CatDatasource(this._httpService);
+  GetCatDatasource(this._httpService);
 
   Future<List<CatDTO>> getCats() async {
     final Map<String, dynamic> headers = {
