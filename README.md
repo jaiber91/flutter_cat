@@ -131,16 +131,7 @@ final selectedCatProvider = StateProvider<CatDomain?>((ref) => null);
 y en la capa de presentación dichos providers se debe usar de acuerdo a la necesidad particular, ejemplo:
 
 ```shell
-        CatCard(
-            imageUrl: cat.imageUrl ?? '',
-            breedName: cat.name,
-            country: cat.origin,
-            intelligence: cat.intelligence,
-            onTap: () {
-              ref.read(selectedCatProvider.notifier).state = cat;
-              context.go(RouteNames.detailPage.path);
-            },
-          );
+      onTap: () {ref.read(selectedCatProvider.notifier).state = cat},
 ```
 ## Manejo de las rutas
 El manejo de las rutas esta gestionado con el paquete **GoRouter**
@@ -176,3 +167,38 @@ Desde los componentes, por ejemplo un botón, se necesita navegar hacia otra vis
 ```shell
 onTap: () {context.go(RouteNames.detailPage.path)},
 ```
+
+## Inyección de Dependencias en el Proyecto
+En este proyecto se usa **getIt** para gestionar las dependencias y garantizar que cada módulo tenga acceso a a las capas u objetos que necesita.
+
+ * **adapters_di.dart:** Registra los servicios relacionados con la capa de datos y adaptadores.
+ * **business_di.dart:** Registra los casos de uso y puertos de entrada de la capa de dominio.
+ * **setup_di.dart:** Punto de entrada donde se inicializan todas las dependencias.
+
+ ### Configuración de los Adapters en DI
+ Este archivo se encarga de registrar los servicios relacionados con la comunicación con APIs y la conversión de datos. Ejemplo:
+```shell
+  getIt.registerLazySingleton<SearchCatsDatasource>(
+    () => SearchCatsDatasource(getIt.get<HttpService>()),
+  );
+
+  getIt.registerLazySingleton<SearchCatOutPorts>(
+    () => SearchCatAdapter(getIt.get<SearchCatsDatasource>()),
+  );
+```
+* Se define HttpService como una dependencia reutilizable.
+* Se crean instancias de SearchCatsDatasource, encargado de obtener los datos desde la API.
+* Se registran los adaptadores SearchCatAdapter, que implementa el puerto de salida.
+
+### Configuración del Business DI
+Este archivo se encarga de registrar los casos de uso y los puertos de entrada en la aplicación.
+
+```shell
+  getIt.registerLazySingleton<SearchCatInPorts>(
+    () => SearchCatUseCase(getIt<SearchCatOutPorts>()),
+  );
+}
+```
+* Se registran los casos de uso (SearchCatUseCase).
+* Se inyectan los puertos de salida (SearchCatOutPorts), garantizando que la capa de dominio no dependa directamente de la capa llamada adapter.
+
