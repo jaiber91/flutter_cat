@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:in_ports/cats/in_ports.dart';
-import 'package:in_ports/cats/search_cats_in_port.dart';
+import 'package:in_ports/cats_in_ports/get_cats_in_ports.dart';
+import 'package:in_ports/cats_in_ports/search_cats_in_port.dart';
 import 'package:flutter_cat/src/presentation/lib/shared/utils/export_di.dart';
-import 'package:domain/cat/cat_domain.dart';
+import 'package:domain/cat_domain/cat_domain.dart';
 
 final getCatProvider = FutureProvider<List<CatDomain>>((ref) async {
-  final getListCast = getIt<CatInPorts>();
+  final getListCast = getIt<GetCatsInPort>();
   return await getListCast.getCat();
 });
 

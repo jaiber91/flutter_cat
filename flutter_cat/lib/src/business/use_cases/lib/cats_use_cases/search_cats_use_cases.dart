@@ -1,6 +1,6 @@
-import 'package:in_ports/cats/search_cats_in_port.dart';
-import 'package:out_ports/cats/search_cats_out_port.dart';
-import 'package:domain/cat/cat_domain.dart';
+import 'package:in_ports/cats_in_ports/search_cats_in_port.dart';
+import 'package:out_ports/cats_out_ports/search_cats_out_port.dart';
+import 'package:domain/cat_domain/cat_domain.dart';
 
 class SearchCatUseCase implements SearchCatInPorts {
   final SearchCatOutPorts _searchCatOutPorts;

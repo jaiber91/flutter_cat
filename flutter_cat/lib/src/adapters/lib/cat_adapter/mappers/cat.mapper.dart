@@ -1,4 +1,4 @@
-import 'package:domain/cat/cat_domain.dart';
+import 'package:domain/cat_domain/cat_domain.dart';
 import '../datasource/dto/response/cat_dto.dart';
 
 extension CatMapper on CatDTO {
