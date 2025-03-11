@@ -5,8 +5,8 @@ import 'package:adapters/cat_adapter/datasource/dto/response/search_cats_datasou
 import 'package:adapters/shared/http/http_interface.dart';
 import 'package:adapters/shared/http/http_service.dart';
 import 'package:get_it/get_it.dart';
-import 'package:out_ports/cats/out_ports.dart';
-import 'package:out_ports/cats/search_cats_out_port.dart';
+import 'package:out_ports/cats_out_ports/get_cats_out_ports.dart';
+import 'package:out_ports/cats_out_ports/search_cats_out_port.dart';
 import 'package:dio/dio.dart';
 
 void adaptersDI(GetIt getIt) {
@@ -19,7 +19,7 @@ void adaptersDI(GetIt getIt) {
   getIt.registerSingleton<CatDatasource>(
       CatDatasource(getIt.get<HttpService>()));
 
-  getIt.registerLazySingleton<CatOutPorts>(() => CatAdapter(
+  getIt.registerLazySingleton<GetCatsOutPort>(() => CatAdapter(
         getIt.get<CatDatasource>(),
       ));
 

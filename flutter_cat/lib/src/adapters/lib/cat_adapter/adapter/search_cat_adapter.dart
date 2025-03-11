@@ -1,6 +1,6 @@
 import 'package:adapters/cat_adapter/mappers/cat.mapper.dart';
-import 'package:domain/cat/cat_domain.dart';
-import 'package:out_ports/cats/search_cats_out_port.dart';
+import 'package:domain/cat_domain/cat_domain.dart';
+import 'package:out_ports/cats_out_ports/search_cats_out_port.dart';
 
 import '../datasource/dto/response/cat_dto.dart';
 import '../datasource/dto/response/search_cats_datasource.dart';
