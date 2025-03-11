@@ -35,25 +35,31 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   Widget build(BuildContext context) {
-    return Platform.isIOS
-        ? CupertinoSearchTextField(
-            controller: widget.controller,
-            focusNode: widget.focusNode,
-            onChanged: _onSearchChanged,
-            placeholder: "Buscar",
-            prefixIcon: const Icon(CupertinoIcons.search),
-          )
-        : TextField(
-            controller: widget.controller,
-            focusNode: widget.focusNode,
-            decoration: InputDecoration(
-              labelText: "Buscar",
-              prefixIcon: const Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            onChanged: _onSearchChanged,
-          );
+    return Platform.isIOS ? _cupertinoSearchTextField() : _textField();
+  }
+
+  CupertinoSearchTextField _cupertinoSearchTextField() {
+    return CupertinoSearchTextField(
+      controller: widget.controller,
+      focusNode: widget.focusNode,
+      onChanged: _onSearchChanged,
+      placeholder: "Buscar",
+      prefixIcon: const Icon(CupertinoIcons.search),
+    );
+  }
+
+  TextField _textField() {
+    return TextField(
+      controller: widget.controller,
+      focusNode: widget.focusNode,
+      decoration: InputDecoration(
+        labelText: "Buscar",
+        prefixIcon: const Icon(Icons.search),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      onChanged: _onSearchChanged,
+    );
   }
 }
