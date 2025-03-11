@@ -45,7 +45,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                 },
               ),
               const SizedBox(height: 16),
-              Expanded(child: CatList(searchQuery: searchQuery)),
+              Expanded(
+                child: CatList(searchQuery: searchQuery),
+              ),
             ],
           ),
         ),

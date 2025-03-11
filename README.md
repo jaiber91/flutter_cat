@@ -12,10 +12,11 @@ App para listar gatos
 - url_launcher: 6.3.1
 - cupertino_icons: 1.0.8
 - freezed: 2.4.7
-- json_serializable: ^6.8.0
-- build_runner: ^2.4.9
+- json_serializable: 6.8.0
+- build_runner: 2.4.9
 
 ## Estructura de carpetas
+La siguiente estructura de carpetas, se realiza pensando en que es un proyecto que va a crecer de manera constante y acelerada; por ende, se propone tener capas lo mas aisladas posibles en dónde quienes hacen de "puentes" entre cada capa son los puertos; adicional si se requiere diseñar y ejecutar test, estos se pueden hacer en la capa que corresponde y no dependen de un archivo global o único dentro del proyecto
 
 ```bash
 .
@@ -103,8 +104,7 @@ Para ello, se debe navegar a la siguiente ruta:
  flutter_cat/lib/src/adapters/pubspeck.yaml
 ```
 
-Una vez se está ubicado en la capa de **ADAPTERS** se debe ejecutar el
-comando el siguiente comando para serilizar
+Una vez se está ubicado en la capa de **ADAPTERS** se debe ejecutar el siguiente comando para serilizar
 
 ```shell
 flutter pub run build_runner build --delete-conflicting-outputs
@@ -201,7 +201,6 @@ Este archivo se encarga de registrar los casos de uso y los puertos de entrada e
   getIt.registerLazySingleton<SearchCatInPorts>(
     () => SearchCatUseCase(getIt<SearchCatOutPorts>()),
   );
-}
 ```
 * Se registran los casos de uso (SearchCatUseCase).
 * Se inyectan los puertos de salida (SearchCatOutPorts), garantizando que la capa de dominio no dependa directamente de la capa llamada adapter.
