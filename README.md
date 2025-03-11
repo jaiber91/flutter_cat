@@ -110,6 +110,10 @@ comando el siguiente comando para serilizar
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
+Cuando finaliza la serialización del modelo se debe visualizar dos archivos asi:
+**cat_dto.freezed.dart**
+**cat_dto.g.dart**
+
 ## Manejo de estado de la aplicación.
 
 El paquete para manejar el estaso es **Riverpod**, la forma en como se propone usar es como un "puente"
